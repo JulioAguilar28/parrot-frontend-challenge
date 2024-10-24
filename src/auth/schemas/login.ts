@@ -1,10 +1,24 @@
 import { z } from 'zod'
 
-const loginSchema = z.object({
-  username: z.string().min(3).email(),
-  password: z.string().min(3)
-})
+const username = z
+  .string()
+  .min(3, { message: 'Invalid username' })
+  .email({ message: 'Invalid username' })
 
-export const validateLogin = (object: object) => {
-  return loginSchema.safeParse(object)
+const password = z.string().min(1, { message: 'Invalid password' })
+
+export const validateUsername = (value: string) => {
+  const response = username.safeParse(value)
+
+  if (response.success) return
+
+  return response.error.errors[0].message
+}
+
+export const validatePassword = (value: string) => {
+  const response = password.safeParse(value)
+
+  if (response.success) return
+
+  return response.error.errors[0].message
 }
