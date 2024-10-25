@@ -1,19 +1,28 @@
-import { RouteObject, Navigate } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 
-import { StoresPage } from '../stores/StoresPage'
+import { StoreLayout } from '../stores/layout/StoreLayout'
+import { StoreList } from '../stores/components/StoreList'
 import { StoreById } from '../stores/pages/StoreById'
 import { LoginPage } from '../auth/LoginPage'
 
-export const privateRoutes: RouteObject[] = [
-  {
-    path: '/stores',
-    element: <StoresPage />
-  },
-  { path: '/stores/:id', element: <StoreById /> },
-  { path: '/*', element: <Navigate replace to="/stores" /> }
-]
+export const PrivateRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/stores" element={<StoreLayout />}>
+        <Route path="" element={<StoreList />} />
+        <Route path=":id" element={<StoreById />} />
+      </Route>
 
-export const publicRoutes: RouteObject[] = [
-  { path: '/login', element: <LoginPage /> },
-  { path: '/*', element: <Navigate replace to="/login" /> }
-]
+      <Route path="/*" element={<Navigate replace to="/stores" />} />
+    </Routes>
+  )
+}
+
+export const PublicRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/*" element={<Navigate replace to="/login" />} />
+    </Routes>
+  )
+}

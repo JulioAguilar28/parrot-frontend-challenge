@@ -1,11 +1,13 @@
 import { ParrotService } from '../../services/ParrotService'
+import { Product } from '../models/products'
 import { StoresResponse } from '../models/stores'
 
-const getStoresRequest = () =>
-  ParrotService.of().get<{ result: StoresResponse }>('/api/v1/users/me')
+export const getStoresRequest = (endpoint: string) =>
+  ParrotService.of()
+    .get<{ result: StoresResponse }>(endpoint)
+    .then((res) => res.data.result)
 
-export const getStores = async () => {
-  const response = await getStoresRequest()
-
-  return response.data.result
-}
+export const getStoreByIdRequest = (endpoint: string, id: string) =>
+  ParrotService.of()
+    .get<{ results: Product[] }>(endpoint, { params: { store: id } })
+    .then((res) => res.data.results)

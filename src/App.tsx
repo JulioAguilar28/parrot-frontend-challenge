@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import Progress from '@mui/joy/CircularProgress'
 
-import { privateRoutes, publicRoutes } from './router/AppRouter'
+import { PrivateRoutes, PublicRoutes } from './router/AppRouter'
 import * as AuthService from './auth/service/auth'
 import * as StorageService from './services/LocalStorage'
 import { useCurrentUser } from './auth/store/useCurrentUser'
@@ -11,7 +11,7 @@ import './App.css'
 function App() {
   const { isLoggedIn, setIsLoggedIn } = useCurrentUser()
   const [loading, setLoading] = useState<boolean>(false)
-  const routes = isLoggedIn ? privateRoutes : publicRoutes
+  const Routes = isLoggedIn ? PrivateRoutes : PublicRoutes
 
   useEffect(() => {
     setLoading(true)
@@ -46,11 +46,7 @@ function App() {
 
   return (
     <BrowserRouter basename="/parrot">
-      <Routes>
-        {routes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-      </Routes>
+      <Routes />
     </BrowserRouter>
   )
 }
