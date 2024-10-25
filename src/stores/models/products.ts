@@ -18,3 +18,5 @@ export interface Category {
   name: string
   sortPosition: number
 }
+
+export type ProductsByCategory = Record<string, Product[]>
