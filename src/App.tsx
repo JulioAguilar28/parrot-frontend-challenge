@@ -10,7 +10,7 @@ import './App.css'
 
 function App() {
   const { isLoggedIn, setIsLoggedIn } = useCurrentUser()
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const Routes = isLoggedIn ? PrivateRoutes : PublicRoutes
 
   useEffect(() => {
