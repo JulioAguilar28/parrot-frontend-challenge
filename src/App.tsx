@@ -5,7 +5,7 @@ import Progress from '@mui/joy/CircularProgress'
 import { privateRoutes, publicRoutes } from './router/AppRouter'
 import * as AuthService from './auth/service/auth'
 import * as StorageService from './services/LocalStorage'
-import { useCurrentUser } from './store/useCurrentUser'
+import { useCurrentUser } from './auth/store/useCurrentUser'
 import './App.css'
 
 function App() {
@@ -29,6 +29,9 @@ function App() {
         console.error({ reason })
         StorageService.clearAccessAndRefreshTokens()
         setUser({ isLoggedIn: false })
+      })
+      .finally(() => {
+        setLoading(false)
       })
   }, [setLoading, setUser])
 

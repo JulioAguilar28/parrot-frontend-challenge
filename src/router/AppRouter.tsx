@@ -4,7 +4,7 @@ import { MenuPage } from '../menu/MenuPage'
 import { LoginPage } from '../auth/LoginPage'
 
 export const privateRoutes: RouteObject[] = [
-  { path: '/menu', element: <MenuPage /> },
+  { path: '/stores', element: <MenuPage /> },
   { path: '/*', element: <Navigate replace to="/menu" /> }
 ]
 

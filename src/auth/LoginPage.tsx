@@ -10,7 +10,7 @@ import * as AuthService from './service/auth'
 import { validatePassword, validateUsername } from './schemas/login'
 import { parseAuthReason } from './service/authErrors'
 import { setAccessAndRefreshTokens } from '../services/LocalStorage'
-import { useCurrentUser } from '../store/useCurrentUser'
+import { useCurrentUser } from './store/useCurrentUser'
 
 type LoginPageState = {
   loading: boolean
