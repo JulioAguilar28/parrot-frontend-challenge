@@ -9,16 +9,16 @@ import { useCurrentUser } from './auth/store/useCurrentUser'
 import './App.css'
 
 function App() {
-  const { user, setUser } = useCurrentUser()
+  const { isLoggedIn, setIsLoggedIn } = useCurrentUser()
   const [loading, setLoading] = useState<boolean>(false)
-  const routes = user.isLoggedIn ? privateRoutes : publicRoutes
+  const routes = isLoggedIn ? privateRoutes : publicRoutes
 
   useEffect(() => {
     setLoading(true)
 
     const handleVerifyCurrentUser = async () => {
-      const user = await AuthService.validateCurrentUser()
-      setUser(user)
+      const isLoggedIn = await AuthService.validateCurrentUser()
+      setIsLoggedIn(isLoggedIn)
     }
 
     handleVerifyCurrentUser()
@@ -28,12 +28,12 @@ function App() {
       .catch((reason) => {
         console.error({ reason })
         StorageService.clearAccessAndRefreshTokens()
-        setUser({ isLoggedIn: false })
+        setIsLoggedIn(false)
       })
       .finally(() => {
         setLoading(false)
       })
-  }, [setLoading, setUser])
+  }, [setIsLoggedIn, setLoading])
 
   // Avoid to show login page while verify current user tokens
   if (loading) {

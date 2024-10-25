@@ -11,6 +11,7 @@ import { validatePassword, validateUsername } from './schemas/login'
 import { parseAuthReason } from './service/authErrors'
 import { setAccessAndRefreshTokens } from '../services/LocalStorage'
 import { useCurrentUser } from './store/useCurrentUser'
+import { autheticateParrotService } from '../services/ParrotService'
 
 type LoginPageState = {
   loading: boolean
@@ -20,7 +21,7 @@ type LoginPageState = {
 }
 
 export const LoginPage = () => {
-  const { setUser } = useCurrentUser()
+  const { setIsLoggedIn } = useCurrentUser()
 
   const [state, setState] = useImmer<LoginPageState>({
     loading: false,
@@ -64,7 +65,8 @@ export const LoginPage = () => {
       })
 
       setAccessAndRefreshTokens(access, refresh)
-      setUser({ isLoggedIn: true })
+      autheticateParrotService(access)
+      setIsLoggedIn(true)
     } catch (reason) {
       // @ts-expect-error reason.response is the response of the server
       const error = parseAuthReason(reason.response.data)

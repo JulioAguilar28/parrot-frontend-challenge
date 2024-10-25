@@ -46,7 +46,7 @@ export class ParrotService {
             console.error(reason)
 
             StorageService.clearAccessAndRefreshTokens()
-            window.location.href = '/parrot/login'
+            // window.location.href = '/parrot/login'
             return Promise.reject(reason)
           }
         }

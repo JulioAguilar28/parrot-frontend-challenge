@@ -20,14 +20,12 @@ export const login = async (credentials: LoginCredentials) => {
 const validateCurrentUserRequest = () =>
   ParrotService.of().get<ValidateCurrentUserResponse>('/api/auth/token/test')
 
-export const validateCurrentUser = async (): Promise<{ isLoggedIn: boolean }> => {
+export const validateCurrentUser = async (): Promise<boolean> => {
   const { access } = StorageService.getAccessAndRefreshTokens()
   if (!access) throw new Error('AuthService: Authentication credentials were not provided.')
 
   autheticateParrotService(access)
   const response = await validateCurrentUserRequest()
 
-  return {
-    isLoggedIn: response.data.status === CurrentUserStatus.LoggedIn
-  }
+  return response.data.status === CurrentUserStatus.LoggedIn
 }
