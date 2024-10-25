@@ -26,12 +26,13 @@ export const StoreList = () => {
   }
 
   return (
-    <section className="px-4 flex flex-wrap gap-3">
+    <section className="p-4 flex justify-center md:justify-normal flex-wrap">
       {data?.stores.map((store) => (
         <Card
           key={store.uuid}
           sx={{
-            width: 248,
+            width: '100%',
+            maxWidth: 280,
             height: 300,
             border: `1px solid ${store.config.brandColor}`,
             justifyContent: 'space-between'

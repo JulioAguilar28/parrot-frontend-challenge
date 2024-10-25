@@ -7,7 +7,7 @@ export interface Product {
   price: string
   alcoholCount: number
   soldAlone: boolean
-  availability: string
+  availability: 'UNAVAILABLE' | 'AVAILABLE'
   providerAvailability: string[]
   category: Category
   barcode: string
