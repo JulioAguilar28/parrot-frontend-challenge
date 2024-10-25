@@ -14,3 +14,8 @@ export const getAccessAndRefreshTokens = () => {
     refresh: localStorage.getItem(LocalStorageKeys.Refresh)
   }
 }
+
+export const clearAccessAndRefreshTokens = () => {
+  localStorage.removeItem(LocalStorageKeys.Access)
+  localStorage.removeItem(LocalStorageKeys.Refresh)
+}

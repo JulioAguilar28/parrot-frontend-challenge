@@ -10,6 +10,7 @@ import * as AuthService from './service/auth'
 import { validatePassword, validateUsername } from './schemas/login'
 import { parseAuthReason } from './service/authErrors'
 import { setAccessAndRefreshTokens } from '../services/LocalStorage'
+import { useCurrentUser } from '../store/useCurrentUser'
 
 type LoginPageState = {
   loading: boolean
@@ -19,6 +20,8 @@ type LoginPageState = {
 }
 
 export const LoginPage = () => {
+  const { setUser } = useCurrentUser()
+
   const [state, setState] = useImmer<LoginPageState>({
     loading: false,
     error: '',
@@ -61,6 +64,7 @@ export const LoginPage = () => {
       })
 
       setAccessAndRefreshTokens(access, refresh)
+      setUser({ isLoggedIn: true })
     } catch (reason) {
       // @ts-expect-error reason.response is the response of the server
       const error = parseAuthReason(reason.response.data)
