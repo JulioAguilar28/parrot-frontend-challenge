@@ -2,7 +2,7 @@ import { autheticateParrotService, ParrotService } from '../../services/ParrotSe
 import * as StorageService from '../../services/LocalStorage'
 
 type LoginCredentials = { username: string; password: string }
-type LoginResponse = { refresh: string; access: string }
+export type LoginResponse = { refresh: string; access: string }
 type ValidateCurrentUserResponse = { status: string }
 
 enum CurrentUserStatus {
