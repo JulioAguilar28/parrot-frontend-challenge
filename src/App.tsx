@@ -45,7 +45,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter basename="/parrot">
+    <BrowserRouter basename="/">
       <Routes />
     </BrowserRouter>
   )
