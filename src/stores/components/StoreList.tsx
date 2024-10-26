@@ -40,8 +40,9 @@ export const StoreList = () => {
         >
           <h4 className="flex flex-col items-center text-xl">{store.name}</h4>
           <Link
+            style={{ backgroundColor: store.config.brandColor ?? '#FF0000' }}
             to={`${store.uuid}`}
-            className={`bg-[${store.config.brandColor}] hover:bg-[${store.config.brandColor}]/75 flex justify-center text-white p-2 rounded-lg`}
+            className={`flex justify-center text-white p-2 rounded-lg`}
           >
             Visitar
           </Link>
